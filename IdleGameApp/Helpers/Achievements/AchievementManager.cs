@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HelloWorld.Helpers.Achievements
+namespace IdleGameApp.Helpers.Achievements
 {
     public class AchievementManager
     {

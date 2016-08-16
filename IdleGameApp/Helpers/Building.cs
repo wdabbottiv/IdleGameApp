@@ -1,7 +1,7 @@
 using System;
 using System.Timers;
 
-namespace HelloWorld
+namespace IdleGameApp.Helpers
 {
     public class Building
     {

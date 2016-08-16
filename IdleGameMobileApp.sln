@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleGameApp", "HelloWorld\IdleGameApp.csproj", "{D3BA9E05-AB4A-4E4E-8992-58F0B352A36D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleGameApp", "IdleGameApp\IdleGameApp.csproj", "{D3BA9E05-AB4A-4E4E-8992-58F0B352A36D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleGameUnitTests", "UnitTestProject2\IdleGameUnitTests.csproj", "{45256AAF-528B-4972-AD7E-87410BC5981C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdleGameUnitTests", "IdleGameUnitTests\IdleGameUnitTests.csproj", "{45256AAF-528B-4972-AD7E-87410BC5981C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

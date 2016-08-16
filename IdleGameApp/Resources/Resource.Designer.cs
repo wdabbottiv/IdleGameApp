@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("HelloWorld.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("IdleGameApp.Resource", IsApplication=true)]
 
-namespace HelloWorld
+namespace IdleGameApp
 {
 	
 	

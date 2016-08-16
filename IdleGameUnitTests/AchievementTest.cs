@@ -1,10 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using HelloWorld.Helpers.Achievements;
+﻿using System.Collections.Generic;
+using IdleGameApp.Helpers.Achievements;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UnitTestProject2
+namespace IdleGameUnitTests
 {
     /// <summary>
     /// Summary description for AchievementTest

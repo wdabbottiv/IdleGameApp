@@ -1,7 +1,6 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 
-namespace HelloWorld
+namespace IdleGameApp.Helpers
 {
     public class MoneyManager
     {

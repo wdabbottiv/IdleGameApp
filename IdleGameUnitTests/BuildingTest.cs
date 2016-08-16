@@ -1,9 +1,9 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HelloWorld;
 using System.Numerics;
+using IdleGameApp.Helpers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UnitTestProject2
+namespace IdleGameUnitTests
 {
     [TestClass]
     public class BuildingTest

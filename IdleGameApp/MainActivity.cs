@@ -1,12 +1,8 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.App;
 using Android.OS;
+using Android.Widget;
 
-namespace HelloWorld
+namespace IdleGameApp
 {
     [Activity(Label = "HelloWorld", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
