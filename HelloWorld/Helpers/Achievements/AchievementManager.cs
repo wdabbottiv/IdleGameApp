@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace UnitTestProject2
+namespace HelloWorld.Helpers.Achievements
 {
-    internal class AchievementManager
+    public class AchievementManager
     {
         private readonly NumberOfClicksAchievement _numberOfClicks =
             new NumberOfClicksAchievement(
-            new List<int>() { 1, 5, 20, 100, 1000 }
+                new List<int>() { 1, 5, 20, 100, 1000 }
             );
         public AchievementManager()
         {

@@ -53,18 +53,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Achievement.cs" />
-    <Compile Include="AchievementManager.cs" />
     <Compile Include="AchievementTest.cs" />
     <Compile Include="BuildingTest.cs" />
-    <Compile Include="IAchieveable.cs" />
-    <Compile Include="NumberOfClicksAchievement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HelloWorld\HelloWorld.csproj">
+    <ProjectReference Include="..\HelloWorld\IdleGameApp.csproj">
       <Project>{D3BA9E05-AB4A-4E4E-8992-58F0B352A36D}</Project>
-      <Name>HelloWorld</Name>
+      <Name>IdleGameApp</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

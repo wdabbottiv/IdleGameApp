@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace UnitTestProject2
+namespace HelloWorld.Helpers.Achievements
 {
-    internal class NumberOfClicksAchievement : IAchieveable
+    public class NumberOfClicksAchievement : IAchieveable
     {
         private int _numberOfClicks = 0;
         private int _levelReached = 0;

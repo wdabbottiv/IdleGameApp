@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Achievements\AchievementManager.cs" />
+    <Compile Include="Helpers\Achievements\IAchieveable.cs" />
+    <Compile Include="Helpers\Achievements\NumberOfClicksAchievement.cs" />
     <Compile Include="Helpers\Building.cs" />
     <Compile Include="Helpers\MoneyManager.cs" />
     <Compile Include="MainActivity.cs" />
