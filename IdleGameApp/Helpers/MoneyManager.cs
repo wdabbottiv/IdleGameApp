@@ -7,9 +7,9 @@ namespace IdleGameApp.Helpers
         public BigInteger TotalMoney = new BigInteger(0);
         public int ClickValue = 1;
 
-        internal string GetPrettyTotal()
+        public string GetPrettyTotal()
         {
-            return TotalMoney.ToString("#,0");
+            return $"${TotalMoney}";
         }
     }
 }

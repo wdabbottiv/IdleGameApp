@@ -24,7 +24,7 @@ namespace IdleGameApp.Helpers
             BuildingRevenue = buildingRevenue;
         }
 
-        private void InitializeTimer()
+        public void InitializeTimer()
         {
             BuildingTimer.Elapsed += MoneyEarningTimerElapsed;
             BuildingTimer.Interval = 250;

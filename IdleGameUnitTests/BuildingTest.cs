@@ -52,5 +52,14 @@ namespace IdleGameUnitTests
             Assert.AreEqual(manager.TotalMoney, new BigInteger(0));
             Assert.AreEqual(building.BuildingsOwned, 1);
         }
+
+        [TestMethod]
+        public void TestPrettyValueOfOneBuilding()
+        {
+            var manager = new MoneyManager();
+            manager.TotalMoney += 10;
+
+            Assert.AreEqual("$10.00", manager.GetPrettyTotal());
+        }
     }
 }
