@@ -22,6 +22,7 @@ namespace IdleGameUnitTests
             building.MoneyEarningTimerElapsed(new object(), new EventArgs());
 
             Assert.AreEqual(moneyAfterOneTick, manager.TotalMoney);
+            Assert.AreEqual(100, building.EarningsPerSecond);
         }
 
         [TestMethod]
@@ -38,6 +39,7 @@ namespace IdleGameUnitTests
             building.MoneyEarningTimerElapsed(new object(), new EventArgs());
 
             Assert.AreEqual(moneyAfterOneTick, manager.TotalMoney);
+            Assert.AreEqual(200, building.EarningsPerSecond);
         }
 
         [TestMethod]
@@ -59,7 +61,7 @@ namespace IdleGameUnitTests
             var manager = new MoneyManager();
             manager.TotalMoney += 10;
 
-            Assert.AreEqual("$10.00", manager.GetPrettyTotal());
+            Assert.AreEqual("$10", manager.GetPrettyTotal());
         }
     }
 }

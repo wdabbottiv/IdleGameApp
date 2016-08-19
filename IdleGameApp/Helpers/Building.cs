@@ -12,6 +12,8 @@ namespace IdleGameApp.Helpers
         public MoneyManager MoneyManager;
         public bool IsButtonEnabled => MoneyManager.TotalMoney >= BuildingCost;
 
+        public double EarningsPerSecond => BuildingRevenue*(1000/BuildingTimer.Interval)*BuildingsOwned;
+
         public Building(MoneyManager manager)
         {
             MoneyManager = manager;
