@@ -19,9 +19,9 @@ namespace IdleGameApp.Helpers
         private List<Building> _buildings = new List<Building>();
         private MoneyManager _moneyManager;
 
-        public BuildingManager(MoneyManager _moneyManager)
+        public BuildingManager(MoneyManager moneyManager)
         {
-            this._moneyManager = _moneyManager;
+            this._moneyManager = moneyManager;
         }
 
         public Building GetBuilding(int v)

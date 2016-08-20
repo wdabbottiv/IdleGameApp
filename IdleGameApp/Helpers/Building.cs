@@ -48,5 +48,13 @@ namespace IdleGameApp.Helpers
                 BuildingCost *= 2;
             }
         }
+
+        internal void HandleClickEvent(object sender, EventArgs e)
+        {
+            HandleBuyBuilding();
+            Wrapper.UpdateEarningPerSecond(EarningsPerSecond);
+            Wrapper.UpdateBuildingsOwned(BuildingsOwned);
+            Wrapper.UpdateCostToBuyNext(BuildingCost);
+        }
     }
 }
