@@ -12,7 +12,7 @@ namespace IdleGameUnitTests
         {
             var manager = new BuildingManager(new MoneyManager());
 
-            manager.InstatiateBuildings(8);
+            manager.InstantiateBuildings(8);
 
             Assert.AreEqual(8, manager.NumberOfBuildings);
             Assert.IsNotNull(manager.GetBuilding(3));

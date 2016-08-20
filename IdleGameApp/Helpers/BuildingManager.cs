@@ -34,13 +34,12 @@ namespace IdleGameApp.Helpers
             return null;
         }
 
-        public void InstatiateBuildings(int numberOfBuildings)
+        public void InstantiateBuildings(int numberOfBuildings)
         {
             for (int i = 0; i < numberOfBuildings; i++)
             {
                 _buildings.Add(new Building(i, i, _moneyManager));
             }
-            
         }
 
         public void AddBuilding(int buildingCost, int buildingProfit)

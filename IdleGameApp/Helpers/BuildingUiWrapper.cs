@@ -7,7 +7,7 @@ using Android.Widget;
 
 namespace IdleGameApp.Helpers
 {
-    public class UiWrapper
+    public class BuildingUiWrapper
     {
         public LinearLayout Layout;
         public TextView EarningsPerSecond;
