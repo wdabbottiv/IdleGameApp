@@ -8,7 +8,7 @@ using IdleGameApp.Helpers.Achievements;
 
 namespace IdleGameApp
 {
-    [Activity(Label = "HelloWorld", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Political Planning", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private AchievementManager _achievementManager;
@@ -177,6 +177,11 @@ namespace IdleGameApp
         {
             _buildingManager.AddBuilding(10, 10);
             _buildingManager.GetBuilding(1).InitializeTimer();
+            _buildingManager.GetBuilding(1).Wrapper = new UiWrapper
+            {
+                Layout = FindViewById<LinearLayout>(Resource.Id.MyBuilding1),
+                BuildingsOwned = FindViewById<TextView>(Resource.Id.MyBuilding1Owned)
+            };
 
             _buildingManager.AddBuilding(50, 20);
             _buildingManager.GetBuilding(2).InitializeTimer();

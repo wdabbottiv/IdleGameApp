@@ -56,6 +56,7 @@
     <Compile Include="Helpers\Building.cs" />
     <Compile Include="Helpers\BuildingManager.cs" />
     <Compile Include="Helpers\MoneyManager.cs" />
+    <Compile Include="Helpers\UiWrapper.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

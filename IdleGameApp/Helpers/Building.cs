@@ -10,6 +10,7 @@ namespace IdleGameApp.Helpers
         public Timer BuildingTimer = new Timer();
         public int BuildingRevenue = 1;
         public MoneyManager MoneyManager;
+        public UiWrapper Wrapper = new UiWrapper();
         public bool IsButtonEnabled => MoneyManager.TotalMoney >= BuildingCost;
 
         public double EarningsPerSecond => BuildingRevenue*(1000/BuildingTimer.Interval)*BuildingsOwned;
