@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace IdleGameApp.Helpers.Achievements
 {
-    public class NumberOfClicksAchievement : IAchieveable
+    public class NumberOfClicksAchievement : Achievement
     {
         private int _numberOfClicks = 0;
         private int _levelReached = 0;
@@ -18,7 +19,7 @@ namespace IdleGameApp.Helpers.Achievements
 
         public int LevelReached => _levelReached;
 
-        public void Increment(int numberOfTimes = 1)
+        public override void Increment(int numberOfTimes = 1)
         {
             _numberOfClicks += numberOfTimes;
 

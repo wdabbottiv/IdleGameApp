@@ -50,7 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AchievementActivity.cs" />
+    <Compile Include="Helpers\Achievements\Achievement.cs" />
     <Compile Include="Helpers\Achievements\AchievementManager.cs" />
+    <Compile Include="Helpers\Achievements\AchievementUiWrapper.cs" />
     <Compile Include="Helpers\Achievements\IAchieveable.cs" />
     <Compile Include="Helpers\Achievements\NumberOfClicksAchievement.cs" />
     <Compile Include="Helpers\Building.cs" />
@@ -62,9 +65,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GettingStarted.Xamarin" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\AchievementLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />

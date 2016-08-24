@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Timers;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using IdleGameApp.Helpers;
@@ -34,6 +35,24 @@ namespace IdleGameApp
 
             InitializeHandlers();
             InitializeBuildings();
+            DrawMenu();
+        }
+
+        private void DrawMenu()
+        {
+            var layout = FindViewById<LinearLayout>(Resource.Id.MainMenu);
+
+            var button = new Button(this.ApplicationContext);
+            button.Text = "Achievements";
+            button.Click += OnAchievementMenuClick;
+
+            layout.AddView(button);
+        }
+
+        private void OnAchievementMenuClick(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(AchievementActivity));
+            StartActivity(intent);
         }
 
         private void HandleMainButtonPress(object sender, EventArgs e)
