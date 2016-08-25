@@ -9,20 +9,27 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using IdleGameApp.Helpers;
 using IdleGameApp.Helpers.Achievements;
+using Newtonsoft.Json;
 
 namespace IdleGameApp
 {
     [Activity(Label = "AchievementActivity")]
     public class AchievementActivity : Activity
     {
-        private AchievementManager _achievementManager = new AchievementManager();
+        private AchievementManager _achievementManager;
+        private BuildingManager _buildingManager;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.AchievementLayout);
+
+            _achievementManager = JsonConvert.DeserializeObject<AchievementManager>(Intent.GetStringExtra("AchievementManager"),
+                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            _buildingManager = JsonConvert.DeserializeObject<BuildingManager>(Intent.GetStringExtra("BuildingManager"));
 
             DrawMenu();
             InitializeAchievements();
@@ -43,6 +50,9 @@ namespace IdleGameApp
         private void OnHomeMenuClick(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(MainActivity));
+            var stuff = JsonConvert.SerializeObject(_buildingManager, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            intent.PutExtra("AchievementManager", stuff);
+            intent.PutExtra("BuildingManager", JsonConvert.SerializeObject(_buildingManager));
             StartActivity(intent);
         }
 

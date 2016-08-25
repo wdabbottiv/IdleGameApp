@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Java.IO;
 
 namespace IdleGameApp.Helpers.Achievements
 {
-    public class AchievementManager
+    public class AchievementManager : ISerializable
     {
         private readonly List<Achievement> _achievements;
 
@@ -24,6 +25,8 @@ namespace IdleGameApp.Helpers.Achievements
 
         public int NumberOfAchievements => _achievements.Count;
 
+        public IntPtr Handle => new IntPtr(1);
+
         public void ClickOccured()
         {
             foreach (var achievement in _achievements)
@@ -35,6 +38,11 @@ namespace IdleGameApp.Helpers.Achievements
         public void Add(Achievement achievement)
         {
             _achievements.Add(achievement);
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

@@ -7,6 +7,7 @@ using Android.OS;
 using Android.Widget;
 using IdleGameApp.Helpers;
 using IdleGameApp.Helpers.Achievements;
+using Newtonsoft.Json;
 
 namespace IdleGameApp
 {
@@ -32,6 +33,19 @@ namespace IdleGameApp
             mainGameTimer.Elapsed += HandleMainGameTimerTick;
             mainGameTimer.Start();
 
+            if (Intent.GetStringExtra("AchievementManager") != null)
+            {
+                _achievementManager = JsonConvert.DeserializeObject<AchievementManager>(Intent.GetStringExtra("AchievementManager"),
+                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            }
+
+            if (Intent.GetStringExtra("BuildingManager") != null)
+            {
+                _buildingManager = JsonConvert.DeserializeObject<BuildingManager>(Intent.GetStringExtra("BuildingManager"),
+                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            }
+            
+
 
             InitializeHandlers();
             InitializeBuildings();
@@ -52,6 +66,9 @@ namespace IdleGameApp
         private void OnAchievementMenuClick(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(AchievementActivity));
+            var stuff = JsonConvert.SerializeObject(_buildingManager, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            intent.PutExtra("AchievementManager", stuff);
+            intent.PutExtra("BuildingManager", JsonConvert.SerializeObject(_buildingManager));
             StartActivity(intent);
         }
 
@@ -71,7 +88,7 @@ namespace IdleGameApp
                 var protectedIterator = i;
                 RunOnUiThread(() =>
                 {
-                    _buildingManager.GetBuilding(protectedIterator).Wrapper.Layout.Background.Alpha =
+                    _buildingManager.GetBuilding(protectedIterator).GetUiWrapper().Layout.Background.Alpha =
                         _buildingManager.GetBuilding(protectedIterator).IsButtonEnabled ? 255 : 60;
                 });
             }
@@ -82,9 +99,9 @@ namespace IdleGameApp
 
         private void InitializeHandlers()
         {
-            _achievementManager = new AchievementManager();
-            _moneyManager = new MoneyManager();
-            _buildingManager = new BuildingManager(_moneyManager);
+            _achievementManager = _achievementManager ?? new AchievementManager();
+            _moneyManager = _moneyManager ?? new MoneyManager();
+            _buildingManager = _buildingManager ?? new BuildingManager(_moneyManager);
         }
 
         private void InitializeBuildings()
@@ -116,11 +133,11 @@ namespace IdleGameApp
             {
                 var building = _buildingManager.GetBuilding(i);
                 building.InitializeTimer();
-                building.Wrapper.InitializeUi(this.ApplicationContext,
+                building.GetUiWrapper().InitializeUi(this.ApplicationContext,
                     i % 2 == 0 ? Android.Graphics.Color.Cyan : Android.Graphics.Color.White);
-                building.Wrapper.UpdateBuildingsOwned(building.BuildingsOwned);
-                building.Wrapper.UpdateEarningPerSecond(building.EarningsPerSecond);
-                building.Wrapper.UpdateCostToBuyNext(building.BuildingCost);
+                building.GetUiWrapper().UpdateBuildingsOwned(building.BuildingsOwned);
+                building.GetUiWrapper().UpdateEarningPerSecond(building.EarningsPerSecond);
+                building.GetUiWrapper().UpdateCostToBuyNext(building.BuildingCost);
             }
         }
 
@@ -128,7 +145,7 @@ namespace IdleGameApp
         {
             for (int i = 1; i <= _buildingManager.NumberOfBuildings; i++)
             {
-                _buildingManager.GetBuilding(i).Wrapper.Layout.Click +=
+                _buildingManager.GetBuilding(i).GetUiWrapper().Layout.Click +=
                     _buildingManager.GetBuilding(i).HandleClickEvent;
             }
         }
@@ -139,7 +156,7 @@ namespace IdleGameApp
             {
                 var layout = FindViewById<LinearLayout>(Resource.Id.TestLayout);
 
-                layout.AddView(_buildingManager.GetBuilding(i).Wrapper.Layout);
+                layout.AddView(_buildingManager.GetBuilding(i).GetUiWrapper().Layout);
             }
         }
     }

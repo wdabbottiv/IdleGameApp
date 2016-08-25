@@ -11,10 +11,25 @@ namespace IdleGameApp.Helpers
         public int BuildingRevenue = 1;
         public int BuildingLevel = 1;
         public MoneyManager MoneyManager;
-        public BuildingUiWrapper Wrapper = new BuildingUiWrapper();
+        private BuildingUiWrapper Wrapper = new BuildingUiWrapper();
+
+        public BuildingUiWrapper GetUiWrapper()
+        {
+            return Wrapper;
+        }
+
+        public void SetUiWrapper(BuildingUiWrapper wrapper)
+        {
+            Wrapper = wrapper;
+        }
         public bool IsButtonEnabled => MoneyManager.TotalMoney >= BuildingCost;
 
         public double EarningsPerSecond => BuildingRevenue*(1000/BuildingTimer.Interval)*BuildingsOwned;
+
+        public Building()
+        {
+            
+        }
 
         public Building(MoneyManager manager)
         {

@@ -16,8 +16,8 @@ namespace IdleGameApp.Helpers
     {
         public int NumberOfBuildings => _buildings.Count;
 
-        private List<Building> _buildings = new List<Building>();
-        private MoneyManager _moneyManager;
+        public List<Building> _buildings = new List<Building>();
+        public MoneyManager _moneyManager;
 
         public BuildingManager(MoneyManager moneyManager)
         {
