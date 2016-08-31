@@ -18,18 +18,16 @@ namespace IdleGameApp
     [Activity(Label = "AchievementActivity")]
     public class AchievementActivity : Activity
     {
-        private AchievementManager _achievementManager;
-        private BuildingManager _buildingManager;
+        private GameObject _gameObject;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.AchievementLayout);
-
-            _achievementManager = JsonConvert.DeserializeObject<AchievementManager>(Intent.GetStringExtra("AchievementManager"),
+            
+            _gameObject = JsonConvert.DeserializeObject<GameObject>(Intent.GetStringExtra("GameObject"),
                 new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-            _buildingManager = JsonConvert.DeserializeObject<BuildingManager>(Intent.GetStringExtra("BuildingManager"));
 
             DrawMenu();
             InitializeAchievements();
@@ -50,27 +48,26 @@ namespace IdleGameApp
         private void OnHomeMenuClick(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(MainActivity));
-            var stuff = JsonConvert.SerializeObject(_buildingManager, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-            intent.PutExtra("AchievementManager", stuff);
-            intent.PutExtra("BuildingManager", JsonConvert.SerializeObject(_buildingManager));
+
+            intent.PutExtra("GameObject", JsonConvert.SerializeObject(_gameObject));
             StartActivity(intent);
         }
 
         private void DrawUi()
         {
-            for (int i = 0; i < _achievementManager.NumberOfAchievements; i++)
+            for (int i = 0; i < _gameObject.AchievementManager.NumberOfAchievements; i++)
             {
                 var layout = FindViewById<LinearLayout>(Resource.Id.AchievementSection);
 
-                layout.AddView(_achievementManager.GetAchievement(i).Wrapper.Layout);
+                layout.AddView(_gameObject.AchievementManager.GetAchievement(i).Wrapper.Layout);
             }
         }
 
         private void InitializeAchievements()
         {
-            for (int i = 0; i < _achievementManager.NumberOfAchievements; ++i)
+            for (int i = 0; i < _gameObject.AchievementManager.NumberOfAchievements; ++i)
             {
-                _achievementManager.GetAchievement(i).Wrapper.InitializeUi(this.ApplicationContext);
+                _gameObject.AchievementManager.GetAchievement(i).Wrapper.InitializeUi(this.ApplicationContext);
             }
         }
     }

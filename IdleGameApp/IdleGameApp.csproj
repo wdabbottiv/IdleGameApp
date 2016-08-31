@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AchievementActivity.cs" />
+    <Compile Include="GameObject.cs" />
     <Compile Include="Helpers\Achievements\Achievement.cs" />
     <Compile Include="Helpers\Achievements\AchievementManager.cs" />
     <Compile Include="Helpers\Achievements\AchievementUiWrapper.cs" />

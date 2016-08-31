@@ -14,9 +14,7 @@ namespace IdleGameApp
     [Activity(Label = "Political Planning", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        private AchievementManager _achievementManager;
-        private MoneyManager _moneyManager;
-        private BuildingManager _buildingManager;
+        private GameObject _gameObject;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -33,19 +31,13 @@ namespace IdleGameApp
             mainGameTimer.Elapsed += HandleMainGameTimerTick;
             mainGameTimer.Start();
 
-            if (Intent.GetStringExtra("AchievementManager") != null)
+            if (Intent.GetStringExtra("GameObject") != null)
             {
-                _achievementManager = JsonConvert.DeserializeObject<AchievementManager>(Intent.GetStringExtra("AchievementManager"),
+                _gameObject = JsonConvert.DeserializeObject<GameObject>(Intent.GetStringExtra("GameObject"),
                 new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
             }
 
-            if (Intent.GetStringExtra("BuildingManager") != null)
-            {
-                _buildingManager = JsonConvert.DeserializeObject<BuildingManager>(Intent.GetStringExtra("BuildingManager"),
-                new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-            }
-            
-
+            _gameObject = _gameObject ?? new GameObject();
 
             InitializeHandlers();
             InitializeBuildings();
@@ -66,42 +58,39 @@ namespace IdleGameApp
         private void OnAchievementMenuClick(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(AchievementActivity));
-            var stuff = JsonConvert.SerializeObject(_buildingManager, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-            intent.PutExtra("AchievementManager", stuff);
-            intent.PutExtra("BuildingManager", JsonConvert.SerializeObject(_buildingManager));
+            intent.PutExtra("GameObject", JsonConvert.SerializeObject(_gameObject));
             StartActivity(intent);
         }
 
         private void HandleMainButtonPress(object sender, EventArgs e)
         {
-            _achievementManager.ClickOccured();
-            _moneyManager.TotalMoney += _moneyManager.ClickValue;
+            _gameObject.AchievementManager.ClickOccured();
+            _gameObject.MoneyManager.TotalMoney += _gameObject.MoneyManager.ClickValue;
             TextView buttonText = FindViewById<TextView>(Resource.Id.MyButtonText);
 
-            buttonText.Text = _moneyManager.GetPrettyTotal();
+            buttonText.Text = _gameObject.MoneyManager.GetPrettyTotal();
         }
 
         private void HandleMainGameTimerTick(object sender, ElapsedEventArgs e)
         {
-            for (int i = 1; i <= _buildingManager.NumberOfBuildings; i++)
+            for (int i = 1; i <= _gameObject.BuildingManager.NumberOfBuildings; i++)
             {
                 var protectedIterator = i;
                 RunOnUiThread(() =>
                 {
-                    _buildingManager.GetBuilding(protectedIterator).GetUiWrapper().Layout.Background.Alpha =
-                        _buildingManager.GetBuilding(protectedIterator).IsButtonEnabled ? 255 : 60;
+                    _gameObject.BuildingManager.GetBuilding(protectedIterator).GetUiWrapper().Layout.Background.Alpha = _gameObject.BuildingManager.GetBuilding(protectedIterator).IsButtonEnabled ? 255 : 60;
                 });
             }
 
             TextView buttonText = FindViewById<TextView>(Resource.Id.MyButtonText);
-            RunOnUiThread(() => { buttonText.Text = _moneyManager.GetPrettyTotal(); });
+            RunOnUiThread(() => { buttonText.Text = _gameObject.MoneyManager.GetPrettyTotal(); });
         }
 
         private void InitializeHandlers()
         {
-            _achievementManager = _achievementManager ?? new AchievementManager();
-            _moneyManager = _moneyManager ?? new MoneyManager();
-            _buildingManager = _buildingManager ?? new BuildingManager(_moneyManager);
+            _gameObject.AchievementManager = _gameObject.AchievementManager ?? new AchievementManager();
+            _gameObject.MoneyManager = _gameObject.MoneyManager ?? new MoneyManager();
+            _gameObject.BuildingManager = _gameObject.BuildingManager ?? new BuildingManager(_gameObject.MoneyManager);
         }
 
         private void InitializeBuildings()
@@ -117,21 +106,21 @@ namespace IdleGameApp
 
         private void InitializePhaseOneBuildings()
         {
-            _buildingManager.AddBuilding(10, 10);
-            _buildingManager.AddBuilding(50, 20);
-            _buildingManager.AddBuilding(100, 40);
-            _buildingManager.AddBuilding(500, 100);
-            _buildingManager.AddBuilding(1000, 150);
-            _buildingManager.AddBuilding(5000, 300);
-            _buildingManager.AddBuilding(10000, 500);
-            _buildingManager.AddBuilding(100000, 2000);
+            _gameObject.BuildingManager.AddBuilding(10, 10);
+            _gameObject.BuildingManager.AddBuilding(50, 20);
+            _gameObject.BuildingManager.AddBuilding(100, 40);
+            _gameObject.BuildingManager.AddBuilding(500, 100);
+            _gameObject.BuildingManager.AddBuilding(1000, 150);
+            _gameObject.BuildingManager.AddBuilding(5000, 300);
+            _gameObject.BuildingManager.AddBuilding(10000, 500);
+            _gameObject.BuildingManager.AddBuilding(100000, 2000);
         }
 
         private void CreateUiComponentsForBuildings()
         {
-            for (int i = 1; i <= _buildingManager.NumberOfBuildings; i++)
+            for (int i = 1; i <= _gameObject.BuildingManager.NumberOfBuildings; i++)
             {
-                var building = _buildingManager.GetBuilding(i);
+                var building = _gameObject.BuildingManager.GetBuilding(i);
                 building.InitializeTimer();
                 building.GetUiWrapper().InitializeUi(this.ApplicationContext,
                     i % 2 == 0 ? Android.Graphics.Color.Cyan : Android.Graphics.Color.White);
@@ -143,20 +132,19 @@ namespace IdleGameApp
 
         private void SetUpBuildingButtonClickHandlers()
         {
-            for (int i = 1; i <= _buildingManager.NumberOfBuildings; i++)
+            for (int i = 1; i <= _gameObject.BuildingManager.NumberOfBuildings; i++)
             {
-                _buildingManager.GetBuilding(i).GetUiWrapper().Layout.Click +=
-                    _buildingManager.GetBuilding(i).HandleClickEvent;
+                _gameObject.BuildingManager.GetBuilding(i).GetUiWrapper().Layout.Click += _gameObject.BuildingManager.GetBuilding(i).HandleClickEvent;
             }
         }
 
         private void AddBuildingsToUi()
         {
-            for (int i = 1; i <= _buildingManager.NumberOfBuildings; i++)
+            for (int i = 1; i <= _gameObject.BuildingManager.NumberOfBuildings; i++)
             {
                 var layout = FindViewById<LinearLayout>(Resource.Id.TestLayout);
 
-                layout.AddView(_buildingManager.GetBuilding(i).GetUiWrapper().Layout);
+                layout.AddView(_gameObject.BuildingManager.GetBuilding(i).GetUiWrapper().Layout);
             }
         }
     }
